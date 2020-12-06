@@ -17,17 +17,18 @@ public int length() {
 }
 
 public boolean hasNext() {
-	if (current >= end) {
+	if (current > end) {
 		return false;
 	}
 	return true;
 }
 
 public int next() {
-	if (current + 1 > end) {
+	if (hasNext() == false) {
 		throw new NoSuchElementException();
 	}
+	int temp = current;
 	current++;
-	return current;
+	return temp;
 }
 }
