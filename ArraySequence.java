@@ -1,11 +1,24 @@
 import java.util.NoSuchElementException;
 public class ArraySequence implements IntegerSequence {
-int currentIndex;
-int[] data;
+
+private int currentIndex;
+private int[] data;
 
 public ArraySequence(int[] other) {
 	data = other;
 	currentIndex = 0;
+}
+
+public ArraySequence(IntegerSequence otherseq) {
+	otherseq.reset();
+	int[] store = new int[otherseq.length()];
+	while (otherseq.hasNext()) {
+		store[currentIndex] = otherseq.next();
+		currentIndex++;
+	}
+	data = store;
+	reset();
+	otherseq.reset();
 }
 
 public int length() {
@@ -17,7 +30,7 @@ public void reset() {
 }
 
 public boolean hasNext() {
-	if (currentIndex >= this.length()) {
+	if (currentIndex >= length()) {
 		return false;
 	}
 	return true;
